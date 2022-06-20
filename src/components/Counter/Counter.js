@@ -17,6 +17,9 @@ function counterReducer(state, action) {
 
   switch (action.type) {
     case ACTIONS.INCR:
+      if (state.count === 7) {
+        return { ...state, error: 'daugiausia 7' };
+      }
       return { count: state.count + 1 };
     case ACTIONS.UPBY:
       return { count: state.count + action.payload };
@@ -66,7 +69,8 @@ function Counter() {
       {/* <button onClick={() => dispatch({ type: ACTIONS.UPBY, payload: 7 })}>
         Up by 7
       </button> */}
-      <button onClick={handleInc}>Increase</button>
+      {state.count < 7 && <button onClick={handleInc}>Increase</button>}
+
       <button onClick={handleDec}>Down</button>
       {/* <button onClick={() => dispatch({ type: 'DOWN5' })}>down 5</button> */}
       <Card />
