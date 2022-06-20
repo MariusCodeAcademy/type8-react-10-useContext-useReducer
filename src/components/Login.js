@@ -2,7 +2,14 @@
 import AuthContext from './../store/authContext';
 import { useContext, useRef } from 'react';
 
+const initValues = {
+  username: '',
+  password: '',
+};
+
 function Login() {
+  // TODO: Login abu inputus valdom su vienu useReducer state
+
   const ctx = useContext(AuthContext);
 
   const userNameRef = useRef();
