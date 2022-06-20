@@ -5,6 +5,7 @@ import { useContext, useRef, useReducer } from 'react';
 const initValues = {
   username: '',
   password: '',
+  password1: '',
   usernameErr: '',
   passwordErr: '',
 };
@@ -23,6 +24,10 @@ function loginReducerFn(state, action) {
         return { ...state, usernameErr: 'Privalomas laukas' };
       }
       return state;
+    case 'input':
+      console.log(action.payload.name);
+      console.log(action.payload.value);
+      return { ...state, [action.payload.name]: action.payload.value };
     default:
       throw new Error('Invalid action type: ' + action.type);
   }
@@ -63,6 +68,14 @@ function Login() {
           onChange={(e) => dispatch({ type: 'password', payload: e.target.value })}
           value={state.password}
           type='password'
+          name='password'
+          placeholder='password'
+        />
+        <input
+          onChange={(e) => dispatch({ type: 'input', payload: e.target })}
+          value={state.password1}
+          type='password'
+          name='password1'
           placeholder='password'
         />
         <button type='submit'>Send</button>
