@@ -18,6 +18,11 @@ function loginReducerFn(state, action) {
       return { ...state, password: action.payload };
     case 'username':
       return { ...state, username: action.payload, usernameErr: '' };
+    case 'usernameBlur':
+      if (state.username.length === 0) {
+        return { ...state, usernameErr: 'Privalomas laukas' };
+      }
+      return state;
     default:
       throw new Error('Invalid action type: ' + action.type);
   }
@@ -47,6 +52,7 @@ function Login() {
       <form onSubmit={handleLogin} autoComplete={'off'}>
         <input
           onChange={(e) => dispatch({ type: 'username', payload: e.target.value })}
+          onBlur={() => dispatch({ type: 'usernameBlur' })}
           value={state.username}
           ref={userNameRef}
           type='text'
